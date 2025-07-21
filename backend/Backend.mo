@@ -1,18 +1,24 @@
+import HashMap "mo:base/HashMap";
+import Principal "mo:base/Principal";
+import Nat "mo:base/Nat";
+
 actor class Backend() {
-  stable var counter = 0;
 
-  // Get the current count
-  public query func get() : async Nat {
-    counter;
+  var usernames = HashMap.HashMap<Principal, Text>(10, Principal.equal, Principal.hash);
+
+  public shared(msg) func setUsername(name: Text) : async Text {
+    let caller = msg.caller;
+    usernames.put(caller, name);
+    return "Username saved!";
   };
 
-  // Increment the count by one
-  public func inc() : async () {
-    counter += 1;
+  public query (message) func getMyUsername() : async ?Text {
+    let caller = message.caller;
+    return usernames.get(caller);
   };
 
-  // Add `n` to the current count
-  public func add(n : Nat) : async () {
-    counter += n;
+  public query func getUsername(p: Principal) : async ?Text {
+    return usernames.get(p);
   };
+
 };
