@@ -1,12 +1,12 @@
 import MainLayout from "../../layout/MainLayout";
 
-function Dashboard(){
+function Profile(){
     return (
         <MainLayout >
             <div>
-                <h1 className="">Dashboard</h1>
+                <h1 className="">Profile</h1>
             </div>
         </MainLayout>
     );
 }
-export default Dashboard;
+export default Profile;

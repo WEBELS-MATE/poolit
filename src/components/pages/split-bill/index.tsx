@@ -1,12 +1,12 @@
 import MainLayout from "../../layout/MainLayout";
 
-function Dashboard(){
+function SplitBill(){
     return (
         <MainLayout >
             <div>
-                <h1 className="">Dashboard</h1>
+                <h1 className="">SplitBill</h1>
             </div>
         </MainLayout>
     );
 }
-export default Dashboard;
+export default SplitBill;

@@ -15,5 +15,15 @@ export const routes: Route[] = [
     path: '/login',
     component: lazy(() => import('../components/pages/login')),
     isProtected: false,
+  },
+  {
+    path: '/split-bill',
+    component: lazy(() => import('../components/pages/split-bill')),
+    isProtected: true,
+  },
+  {
+    path: '/profile',
+    component: lazy(() => import('../components/pages/profile')),
+    isProtected: true,
   }
 ];
