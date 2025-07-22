@@ -66,4 +66,5 @@ actor class Backend() {
   public query func getUsername(p : Principal) : async ?Text {
     return usernames.get(p);
   };
+
 };
