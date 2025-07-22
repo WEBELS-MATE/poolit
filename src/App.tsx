@@ -4,6 +4,7 @@ import { createActor } from './declarations/backend';
 import { canisterId } from './declarations/backend';
 import type { _SERVICE } from './declarations/backend/backend.did';
 import { HttpAgent } from '@dfinity/agent';
+import SplitBillCreate from './components/SplitBillCreate';
 
 const network = process.env.DFX_NETWORK;
 const identityProvider =
@@ -107,6 +108,7 @@ const App: React.FC = () => {
               Save Username
             </button>
           </div>
+          <SplitBillCreate />
         </>
       )}
     </div>
