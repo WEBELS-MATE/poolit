@@ -1,6 +1,6 @@
 import HashMap "mo:base/HashMap";
 import Principal "mo:base/Principal";
-import Nat "mo:base/Nat";
+// import Nat "mo:base/Nat";
 
 actor class Backend() {
 
@@ -20,5 +20,5 @@ actor class Backend() {
   public query func getUsername(p: Principal) : async ?Text {
     return usernames.get(p);
   };
-
+  
 };
