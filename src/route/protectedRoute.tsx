@@ -24,7 +24,7 @@ const ProtectedRoute = ({ children }: React.PropsWithChildren<{}>) => {
         const agent = new HttpAgent({ identity });
 
         if (process.env.DFX_NETWORK !== 'ic') {
-          agent.fetchRootKey().catch((err) => {
+          await agent.fetchRootKey().catch((err) => {
             console.warn(
               'Unable to fetch root key. Check to ensure that your local replica is running',
             );
