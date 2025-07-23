@@ -4,7 +4,7 @@ import Friends from '../../assets/friends.png';
 
 export default function TopBar() {
   const location = useLocation();
-   const matchDetail = useMatch("/split-bill/detail/:id");
+  const matchDetail = useMatch("/split-bill/detail/:id");
 
   const getTitle = () => {
     const path = location.pathname;
@@ -13,6 +13,8 @@ export default function TopBar() {
     if (matchDetail) return 'Detail Bill';
     if (path === '/profile') return 'Profile';
     if (path === '/split-bill/create') return 'Choose Bill Option';
+    if (path === '/split-bill/create/input-amount') return 'Input Amount';
+    if (path === '/split-bill/create/input-item') return 'Input Item';
     return 'Page';
   };
 

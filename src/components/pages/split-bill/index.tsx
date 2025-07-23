@@ -165,7 +165,7 @@ function SplitBill() {
         <MainLayout >
             <div className="p-6 relative">
                 <Tabs tabs={tabItems} />
-                <Link to={'/split-bill/create-bill'} className="z-10 px-5 fixed bottom-12 right-12 py-3 w-fit flex bg-[#BA2685] rounded-lg items-center gap-x-1 text-white hover:font-semibold">
+                <Link to={'/split-bill/create'} className="z-10 px-5 fixed bottom-12 right-12 py-3 w-fit flex bg-[#BA2685] rounded-lg items-center gap-x-1 text-white hover:font-semibold">
                     New Bill
                 </Link>
             </div>

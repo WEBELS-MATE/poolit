@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import MainLayout from '../../layout/MainLayout';
 import BoxPencil from '../../../assets/box-pencil.png';
 import Box from '../../../assets/box.png';
@@ -9,7 +10,7 @@ export default function reate() {
         style={{ fontFamily: 'Namco Regular' }}
         className="grid grid-cols-1 md:grid-cols-2 text-[#] h-screen w-full place-items-center"
       >
-        <div
+        <Link to={'/split-bill/create/input-amount'}
           className="w-150 flex flex-col h-150 bg-[linear-gradient(224deg,_#BA2685_-2.35%,_#54113C_96.44%)] shadow-lg"
           style={{
             clipPath:
@@ -25,8 +26,9 @@ export default function reate() {
           <h2 className="ml-10 mt-3 text-3xl text-white text-start">
             total amount
           </h2>
-        </div>
-        <div
+        </Link>
+        <Link
+          to={'/split-bill/create/input-item'}
           className="w-150 flex flex-col h-150 bg-[#BA2685] shadow-lg"
           style={{
             clipPath:
@@ -42,7 +44,7 @@ export default function reate() {
           <h2 className="ml-10 mt-3 text-3xl text-white text-start">
             amount item
           </h2>
-        </div>
+        </Link>
       </div>
     </MainLayout>
   );

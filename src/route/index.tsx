@@ -35,6 +35,16 @@ export const routes: Route[] = [
     path: '/split-bill/create',
     component: lazy(() => import('../components/pages/split-bill/create-bill')),
     isProtected: true,
+  },
+  {
+    path: '/split-bill/create/input-amount',
+    component: lazy(() => import('../components/pages/split-bill/input-amount')),
+    isProtected: true,
+  },
+  {
+    path: '/split-bill/create/input-item',
+    component: lazy(() => import('../components/pages/split-bill/input-item')),
+    isProtected: true,
   }
 
 ];
