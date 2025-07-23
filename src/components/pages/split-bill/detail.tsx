@@ -112,7 +112,16 @@ const BillDetailPage = () => {
   useEffect(() => {
     // Simulasi pencarian berdasarkan id
     const found = dummyBills.find((item) => item.bill_id === Number(id));
-    setBill(found || null);
+    if (found) {
+      setBill({
+        bill_id: found.bill_id,
+        title: found.title,
+        date: found.date,
+        total_amount: found.details.total_amount,
+      });
+    } else {
+      setBill(null);
+    }
   }, [id]);
 
   if (!bill) {
@@ -126,7 +135,7 @@ const BillDetailPage = () => {
       <div className="bg-white p-6 rounded-lg shadow-md border">
         <p className="text-lg font-semibold">Judul: {bill.title}</p>
         <p className="text-md mt-2">Tanggal: {bill.date}</p>
-        <p className="text-md mt-2">Total: Rp{bill.details.total_amount.toLocaleString("id-ID")}</p>
+        {/* <p className="text-md mt-2">Total: Rp{bill.details.total_amount.toLocaleString("id-ID")}</p> */}
         <button
           className="mt-4 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded"
           onClick={() => window.history.back()}

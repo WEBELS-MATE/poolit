@@ -44,14 +44,13 @@ actor class Backend() {
     User.getPrincipal(name, userMaps);
   };
 
-  public func addToAddressBook(caller : Principal, p : Principal) : async Text {
-    AddressBook.addToAddressBook(caller, p, addressBooks);
+  public shared(msg) func addToAddressBook(p : Principal) : async Text {
+    AddressBook.addToAddressBook(msg.caller, p, addressBooks);
   };
 
   public shared(msg) func addUsernameToAddressBook(username : Text) : async Text {
-    let caller = msg.caller;
     switch (userMaps.usernameLookup.get(username)) {
-      case (?p) { await addToAddressBook(caller, p) };
+      case (?p) { AddressBook.addToAddressBook(msg.caller, p, addressBooks) };
       case null { "Username not found." };
     };
   };
