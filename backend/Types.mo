@@ -5,7 +5,7 @@ module {
 
   public type SplitBillContractee = {
     principal : Principal;
-    description : Text;
+    description : [SplitBillItemList];
     share : Nat;
     amount : Nat;
     paid : Bool;
@@ -21,5 +21,10 @@ module {
     type_of_split : Text;
     contractees : [SplitBillContractee];
   };
+
+  public type SplitBillItemList = {
+    item_name : Text;
+    item_price : Nat;
+  }
   
 }
