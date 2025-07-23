@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import MainLayout from "../../layout/MainLayout";
-import Tabs from "../../ui/tabs";
-import BillDetail from '../../../assets/bill-detail.png';
 
-const onGoingBillSamples = [{
+// Dummy data, ganti nanti dengan fetch atau props
+const dummyBills = [
+ {
     'bill_id': 1,
     'title': "Bill From ZeroZennn",
     'status': 'ongoing',
@@ -52,10 +53,7 @@ const onGoingBillSamples = [{
             'amount': 100000,
         }]
     }
-}, 
-]
-
-const completedBillSamples = [{
+}, {
     'bill_id': 5,
     'title': "Liburan Bareng",
     'status': 'completed',
@@ -104,35 +102,41 @@ const completedBillSamples = [{
             'amount': 100000,
         }]
     }
-}, 
-]
+}
+];
 
-const billView = (samples: typeof onGoingBillSamples) => {
-    return samples.map((bill) => (
-        <div key={bill.bill_id} className="bg-pink-600 p-4 mb-6 rounded-lg flex justify-between rounded text-white">
-            <div className='flex flex-col items-start'>
-                <p className="font-semibold">{bill.title}</p>
-                <p className="text-sm">{bill.date}</p>
-            </div>
-             <Link to={`/split-bill/detail/${bill.bill_id}`} className="w-fit flex items-center gap-x-1 hover:font-semibold">
-                Bill Detail <img src={BillDetail} className="w-5 h-5" />
-           </Link>
-        </div>
-    ));
+const BillDetailPage = () => {
+  const { id } = useParams<{ id: string }>();
+  const [bill, setBill] = useState<{ bill_id: number; title: string; date: string; total_amount: number } | null>(null);
+
+  useEffect(() => {
+    // Simulasi pencarian berdasarkan id
+    const found = dummyBills.find((item) => item.bill_id === Number(id));
+    setBill(found || null);
+  }, [id]);
+
+  if (!bill) {
+    return <div className="p-4">Bill not found.</div>;
+  }
+
+  return (
+     <MainLayout >
+    <div className="p-6 max-w-xl mx-auto">
+      <h1 className="text-2xl font-bold mb-4">Detail Tagihan</h1>
+      <div className="bg-white p-6 rounded-lg shadow-md border">
+        <p className="text-lg font-semibold">Judul: {bill.title}</p>
+        <p className="text-md mt-2">Tanggal: {bill.date}</p>
+        <p className="text-md mt-2">Total: Rp{bill.details.total_amount.toLocaleString("id-ID")}</p>
+        <button
+          className="mt-4 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded"
+          onClick={() => window.history.back()}
+        >
+          Kembali
+        </button>
+      </div>
+    </div>
+     </MainLayout>
+  );
 };
 
-function SplitBill(){
-     const tabItems = [
-    { title: 'On Going', content: billView(onGoingBillSamples)},
-    { title: 'Completed', content: billView(completedBillSamples) },
-  ];
-
-    return (
-        <MainLayout >
-            <div className="p-6">
-                <Tabs tabs={tabItems} />
-            </div>
-        </MainLayout>
-    );
-}
-export default SplitBill;
+export default BillDetailPage;

@@ -1,14 +1,16 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useMatch } from 'react-router-dom';
 import Notification from '../../assets/notification.png';
 import Friends from '../../assets/friends.png';
 
 export default function TopBar() {
   const location = useLocation();
+   const matchDetail = useMatch("/split-bill/detail/:id");
 
   const getTitle = () => {
     const path = location.pathname;
     if (path === '/') return 'Dashboard';
-    if (path === '/split-bill') return 'Split Bill';
+    if (path === '/split-bill') return 'Bill List';
+    if (matchDetail) return 'Detail Bill';
     if (path === '/profile') return 'Profile';
     return 'Page';
   };
