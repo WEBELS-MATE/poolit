@@ -4,7 +4,7 @@ import ProtectedRoute from './route/protectedRoute';
 import { routes } from './route';
 
 function App() {
-  const renderRoute = (route:any) => {
+  const renderRoute = (route: any) => {
     const Component = route.component;
     const element = route.isProtected ? (
       <ProtectedRoute>
@@ -13,8 +13,8 @@ function App() {
     ) : (
       <Component />
     );
-    return <Route path={route.path} element={element} />;
-  }
+    return <Route key={route.path} path={route.path} element={element} />;
+  };
   return (
     <BrowserRouter>
       <Routes>
@@ -22,5 +22,5 @@ function App() {
       </Routes>
     </BrowserRouter>
   );
-};
+}
 export default App;

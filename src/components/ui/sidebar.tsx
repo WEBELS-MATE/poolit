@@ -1,63 +1,106 @@
 import { NavLink, Link } from 'react-router-dom';
 import Logo from '../../assets/logo.png';
-import  Logout  from '../../assets/logout.png';
-import Profile from '../../assets/profile.png';
 import Dashboard from '../../assets/dashboard.png';
+import DashboardActive from '../../assets/dashboard-active.png';
 import SplitBill from '../../assets/split-bill.png';
+import SplitBillActive from '../../assets/split-bill-active.png';
+import Profile from '../../assets/profile.png';
+import ProfileActive from '../../assets/profile-active.png';
+import Logout from '../../assets/logout.png';
 
-const DashboardIcon = ({ className }: { className?: string }) => (
-  <span className={className}><img src={Dashboard} alt="Dashboard Icon" /></span>
+const DashboardIcon = ({
+  className,
+  isActive,
+}: {
+  className?: string;
+  isActive: boolean;
+}) => (
+  <span className={className}>
+    <img src={isActive ? DashboardActive : Dashboard} alt="Dashboard Icon" />
+  </span>
 );
-const SplitBillIcon = ({ className }: { className?: string }) => (
-  <span className={className}><img src={SplitBill} alt="Split Bill Icon" /></span>
+const SplitBillIcon = ({
+  className,
+  isActive,
+}: {
+  className?: string;
+  isActive: boolean;
+}) => (
+  <span className={className}>
+    <img src={isActive ? SplitBillActive : SplitBill} alt="SplitBill Icon" />
+  </span>
 );
-const ProfileIcon = ({ className }: { className?: string }) => (
-  <span className={className}><img src={Profile} alt="Profile Icon" /></span>
+const ProfileIcon = ({
+  className,
+  isActive,
+}: {
+  className?: string;
+  isActive: boolean;
+}) => (
+  <span className={className}>
+    <img src={isActive ? ProfileActive : Profile} alt="Profile Icon" />
+  </span>
 );
 const LogoutIcon = ({ className }: { className?: string }) => (
-  <span className={className}><img src={Logout} alt="Logout Icon" /></span>
+  <span className={className}>
+    <img src={Logout} alt="Logout Icon" />
+  </span>
 );
 
 export default function Sidebar() {
   const baseLinkClass =
-    'flex items-center w-full p-4 rounded-lg text-lg font-semibold';
+    'flex items-center w-full px-4 py-3 rounded-lg text-md font-semibold';
 
   const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
     isActive
       ? `${baseLinkClass} bg-[#BA2685] text-white`
       : `${baseLinkClass} text-[#BA2685] hover:bg-pink-100 hover:text-pink-600`;
   return (
-    <div className="border-r p-5 border-gray-500 h-full">
-      <div className="flex flex-col  items-center mb-16">
-        <img src={Logo} alt="Poolit Logo" className="w-50 h-50" />
+    <div className="fixed top-0 left-0 h-screen w-64 bg-white border-r border-gray-300 flex flex-col p-5">
+      <div className="flex flex-col items-center mb-10">
+        <img src={Logo} alt="Poolit Logo" className="select-none w-32 h-32 object-contain" />
       </div>
-      <nav className="flex-grow">
-        <ul className="flex gap-20 flex-col">
+      <nav className="flex flex-col flex-grow">
+        <ul className="flex flex-col gap-4 flex-grow">
           <li>
             <NavLink to="/" className={getNavLinkClass}>
-              <DashboardIcon className="mr-4" /> Dashboard
+              {({ isActive }) => (
+                <>
+                  <DashboardIcon className="mr-4" isActive={isActive} /> Dashboard
+                </>
+              )}
             </NavLink>
           </li>
           <li>
             <NavLink to="/split-bill" className={getNavLinkClass}>
-              <SplitBillIcon className="mr-4" /> Split Bill
+              {({ isActive }) => (
+                <>
+                  <SplitBillIcon className="mr-4" isActive={isActive} /> Split Bill
+                </>
+              )}
             </NavLink>
           </li>
           <li>
             <NavLink to="/profile" className={getNavLinkClass}>
-              <ProfileIcon className="mr-4" /> Profile
+              {({ isActive }) => (
+                <>
+                  <ProfileIcon className="mr-4" isActive={isActive} /> Profile
+                </>
+              )}
             </NavLink>
+          </li>
+
+          {/* Logout at the bottom */}
+          <li className="mt-auto">
+            <Link
+              to="/logout"
+              className={`${baseLinkClass} text-[#BA2685] hover:bg-pink-100 hover:text-pink-600`}
+            >
+              <LogoutIcon className="mr-4" /> Logout
+            </Link>
           </li>
         </ul>
       </nav>
-      <div className="mt-40 bottom-10 ">
-        <Link
-          to="/logout"
-          className={`${baseLinkClass} text-[#BA2685] hover:bg-pink-100 hover:text-pink-600`}
-        >
-          <LogoutIcon className="mr-4" /> Logout
-        </Link>
-      </div>
     </div>
   );
 }
