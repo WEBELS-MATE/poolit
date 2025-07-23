@@ -1,6 +1,6 @@
 type ButtonProps = {
   text: string;
-  width: number;
+  width: string;
   onClick?: () => void;
 };
 export default function Button({ text, width }: ButtonProps) {
