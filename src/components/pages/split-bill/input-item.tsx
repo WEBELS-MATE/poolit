@@ -75,7 +75,7 @@ export default function InputItem() {
             <p className="text-center flex-1 bg-[#BA2685] text-white h-15 w-full flex items-center justify-center rounded-lg">
               Add Participant
             </p>
-            <ul className="mt-10 text-[#BA2685] ml-3 flex flex-col gap-10 h-120 overflow-y-auto pr-2 custom-scrollbar">
+            <ul className="mt-10 text-[#BA2685] ml-3 flex flex-col gap-10 h-105 overflow-y-auto pr-2 custom-scrollbar">
               <li className="grid grid-cols-5 gap-2">
                 <p className="text-start">Profile</p>
                 <p className="text-start col-span-3">Username 1</p>
