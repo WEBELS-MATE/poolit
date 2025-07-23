@@ -12,6 +12,7 @@ export default function TopBar() {
     if (path === '/split-bill') return 'Bill List';
     if (matchDetail) return 'Detail Bill';
     if (path === '/profile') return 'Profile';
+    if (path === '/split-bill/create') return 'Choose Bill Option';
     return 'Page';
   };
 
