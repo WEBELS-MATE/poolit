@@ -84,8 +84,8 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: 24, fontFamily: 'Arial' }}>
-      <h1>Internet Identity + Username</h1>
+    <div style={{ padding: 24, fontFamily: 'Namco Regular' }}>
+      <h1>internet identity ( ) Username</h1>
 
       {!isAuthenticated ? (
         <button onClick={login}>Login with Internet Identity</button>
