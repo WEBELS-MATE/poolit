@@ -33,7 +33,7 @@ export const routes: Route[] = [
   },
   {
     path: '/split-bill/create',
-    component: lazy(() => import('../components/pages/split-bill/create')),
+    component: lazy(() => import('../components/pages/split-bill/create-bill')),
     isProtected: true,
   }
 

@@ -54,7 +54,7 @@ export default function Sidebar() {
   const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
     isActive
       ? `${baseLinkClass} bg-[#BA2685] text-white`
-      : `${baseLinkClass} text-[#BA2685] hover:bg-pink-100 hover:text-pink-600`;
+      : `${baseLinkClass} text-[#BA2685] hover:bg-[#BA2685]-100 hover:text-[#BA2685]`;
   return (
     <div className="fixed top-0 left-0 h-screen w-64 bg-white border-r border-gray-300 flex flex-col p-5">
       <div className="flex flex-col items-center mb-10">
@@ -94,7 +94,7 @@ export default function Sidebar() {
           <li className="mt-auto">
             <Link
               to="/logout"
-              className={`${baseLinkClass} text-[#BA2685] hover:bg-pink-100 hover:text-pink-600`}
+              className={`${baseLinkClass} text-[#BA2685] hover:bg-[#BA2685]-100 hover:text-[#BA2685]`}
             >
               <LogoutIcon className="mr-4" /> Logout
             </Link>
