@@ -7,6 +7,11 @@ interface Route {
 export const routes: Route[] = [
   {
     path: '/',
+    component: lazy(() => import('../components/pages/landing-page')),
+    isProtected: false,
+  },
+  {
+    path: '/dashboard',
     component: lazy(() => import('../components/pages/dashboard')),
     isProtected: true,
   },
