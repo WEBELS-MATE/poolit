@@ -20,11 +20,10 @@ export default function Tabs({ tabs }: TabsProps) {
           <button
             key={index}
             onClick={() => setActiveIndex(index)}
-            className={`w-1/2 rounded-md text-center px-4 py-2 text-sm font-medium transition-colors duration-300 ${
-              index === activeIndex
-                ? 'bg-[#BA2685] text-white'
+            className={`w-1/2 rounded-md text-center px-4 py-2 text-sm font-medium transition-colors duration-300 ${index === activeIndex
+                ? 'bg-gradient-to-r from-[#BA2685] to-[#F36BAB] text-white'
                 : 'bg-transparent text-[#BA2685]'
-            }`}
+              }`}
           >
             {tab.title}
           </button>

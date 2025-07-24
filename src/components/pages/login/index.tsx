@@ -85,28 +85,28 @@ const Login: React.FC = () => {
 
   return (
     <div style={{ padding: 24, fontFamily: 'Namco Regular' }}>
-      <h1>internet identity ( ) Username</h1>
+      <h1>internet identity ( ) username</h1>
 
       {!isAuthenticated ? (
-        <button onClick={login}>Login with Internet Identity</button>
+        <button onClick={login}>login with internet identity</button>
       ) : (
         <>
-          <button onClick={logout}>Logout</button>
+          <button onClick={logout}>logout</button>
           <div style={{ marginTop: 20 }}>
-            <h3>Principal:</h3>
+            <h3>principal:</h3>
             <code>{principal}</code>
 
-            <h3 style={{ marginTop: 20 }}>Your Username:</h3>
-            <p>{username || 'No username set yet.'}</p>
+            <h3 style={{ marginTop: 20 }}>your username:</h3>
+            <p>{username || 'no username set yet.'}</p>
 
             <input
               type="text"
               value={inputName}
               onChange={(e) => setInputName(e.target.value)}
-              placeholder="Set new username"
+              placeholder="set new username"
             />
             <button onClick={saveUsername} style={{ marginLeft: 10 }}>
-              Save Username
+              save username
             </button>
           </div>
         </>

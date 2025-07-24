@@ -5,7 +5,7 @@ type ButtonProps = {
 };
 export default function Button({ text, width }: ButtonProps) {
   return (
-    <button>
+    <button className="cursor-pointer">
       <svg
         width={width}
         height="94"

@@ -1,175 +1,89 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
 import MainLayout from "../../layout/MainLayout";
-import Tabs from "../../ui/tabs";
-import BillDetail from '../../../assets/bill-detail.png';
+import ListBillParticipants from '../../ui/list-bill-participants';
+import BillButton from '../../ui/bill-button';
 
-const onGoingBillSamples = [{
-  'contract_id': 1,
-  'title': "Bill From ZeroZennn",
-  'status': 'ongoing',
-  'bill_maker': 9000,
-  'date': '22-07-2025',
-  'total_amount': 1000000,
-  'type_of_split': 'equal',
-  'contractees': [{
-    'principal': 12000,
-    'description': "",
-    'share': 1000,
-    'paid': false,
-    'amount': 250000,
-  },
-  {
-    'principal': 11000,
-    'description': "",
-    'share': 1000,
-    'paid': true,
-    'amount': 250000,
-  },
-  {
-    'principal': 10000,
-    'description': "",
-    'share': 1000,
-    'paid': false,
-    'amount': 250000,
-  },
-  {
-    'principal': 9000,
-    'description': "",
-    'share': 1000,
-    'paid': true,
-    'amount': 250000,
-  }]
-}, {
-  'contract_id': 2,
-  'title': "Gacoan",
-  'status': 'ongoing',
-  'bill_maker': 10000,
-  'date': '18-07-2025',
-  'total_amount': 250000,
-  'type_of_split': 'custom',
-  'contractees': [
-    {
-      'principal': 11000,
-      'description': "",
-      'share': 1000,
-      'paid': true,
-      'amount': 100000,
-    },
-    {
-      'principal': 10000,
-      'description': "",
-      'share': 1000,
-      'paid': false,
-      'amount': 50000,
-    },
-    {
-      'principal': 9000,
-      'description': "",
-      'share': 1000,
-      'paid': true,
-      'amount': 100000,
-    }]
-}
-]
-
-const completedBillSamples = [{
-  'contract_id': 5,
-  'title': "Liburan Bareng",
-  'status': 'completed',
-  'bill_maker': 9000,
-  'date': '22-07-2025',
-  'total_amount': 2000000,
-  'type_of_split': 'equal',
-  'contractees': [{
-    'principal': 12000,
-    'description': "",
-    'share': 1000,
-    'paid': true,
-    'amount': 500000,
-  },
-  {
-    'principal': 11000,
-    'description': "",
-    'share': 1000,
-    'paid': true,
-    'amount': 500000,
-  },
-  {
-    'principal': 10000,
-    'description': "",
-    'share': 1000,
-    'paid': true,
-    'amount': 500000,
-  },
-  {
-    'principal': 9000,
-    'description': "",
-    'share': 1000,
-    'paid': true,
-    'amount': 500000,
-  }]
-}, {
-  'contract_id': 6,
-  'title': "Warkop 99",
-  'status': 'completed',
-  'bill_maker': 10000,
-  'date': '18-07-2025',
-  'total_amount': 450000,
-  'type_of_split': 'custom',
-  'contractees': [
-    {
-      'principal': 11000,
-      'description': "",
-      'share': 1000,
-      'paid': true,
-      'amount': 150000,
-    },
-    {
-      'principal': 10000,
-      'description': "",
-      'share': 1000,
-      'paid': true,
-      'amount': 150000,
-    },
-    {
-      'principal': 9000,
-      'description': "",
-      'share': 1000,
-      'paid': true,
-      'amount': 100000,
-    }]
-}
-]
-
-const billView = (samples: typeof onGoingBillSamples) => {
-  return samples.map((bill) => (
-    <div key={bill.contract_id} className="bg-[#BA2685] p-4 mb-6 rounded-lg flex justify-between rounded text-white">
-      <div className='flex flex-col items-start'>
-        <p className="font-semibold">{bill.title}</p>
-        <p className="text-sm">{bill.date}</p>
-      </div>
-      <Link to={`/split-bill/detail/${bill.contract_id}`} className="w-fit flex items-center gap-x-1 hover:font-semibold">
-        Bill Detail <img src={BillDetail} className="w-5 h-5" />
-      </Link>
-    </div>
-  ));
-};
+const listParticipants = [
+  { principal: 12000, username: "ZeroZennn" },
+  { principal: 11000, username: "Xeyy" },
+  { principal: 10000, username: "Dnsy" },
+  { principal: 9000, username: "rfii" },
+  { principal: 8000, username: "Kluftein21" },
+  { principal: 7000, username: "Rizky" },
+  { principal: 6000, username: "Rizal" },
+  { principal: 5000, username: "Fathur" },
+];
 
 function InputAmount() {
-  const tabItems = [
-    { title: 'On Going', content: billView(onGoingBillSamples) },
-    { title: 'Completed', content: billView(completedBillSamples) },
-  ];
+  const [activeTab, setActiveTab] = useState<'equal' | 'custom'>('equal');
+  const [totalAmount, setTotalAmount] = useState<string>('');
 
+  const handleTotalAmountChange = (value: string) => {
+    // Izinkan hanya angka atau string kosong
+    if (value === '' || /^\d*\.?\d*$/.test(value)) {
+      setTotalAmount(value);
+    }
+  };
+
+  const numericTotalAmount = Number(totalAmount) || 0;
   return (
-    <MainLayout >
-      <div className="p-6 relative">
-        <Tabs tabs={tabItems} />
-        <Link to={'/split-bill/create'} className="z-10 px-5 fixed bottom-12 right-12 py-3 w-fit flex bg-[#BA2685] rounded-lg items-center gap-x-1 text-white hover:font-semibold">
-          New Bill
-        </Link>
+    <MainLayout>
+      <div className="w-full h-full p-6 pb-0">
+        {/* Tabs */}
+        <div className="w-full border-2 border-[#BA2685] rounded-lg flex p-4 mb-8">
+          <button
+            onClick={() => setActiveTab('equal')}
+            className={`w-1/2 rounded-md text-center px-4 py-2 text-sm font-medium transition-colors duration-300 ${activeTab === 'equal'
+              ? 'bg-gradient-to-r from-[#BA2685] to-[#F36BAB] text-white'
+              : 'bg-transparent text-[#BA2685]'
+              }`}
+          >
+            Divide equally
+          </button>
+          <button
+            onClick={() => setActiveTab('custom')}
+            className={`w-1/2 rounded-md text-center px-4 py-2 text-sm font-medium transition-colors duration-300 ${activeTab === 'custom'
+              ? 'bg-gradient-to-r from-[#BA2685] to-[#F36BAB] text-white'
+              : 'bg-transparent text-[#BA2685]'
+              }`}
+          >
+            Custom
+          </button>
+        </div>
+
+        <main className="flex-1 grid grid-cols-1 lg:grid-cols-5 gap-8 pb-6">
+          <div className="lg:col-span-3 h-[65vh] max-h-[65vh]">
+            <ListBillParticipants
+              type={activeTab}
+              totalAmount={numericTotalAmount}
+              allParticipants={listParticipants}
+            />
+          </div>
+
+          <div className="lg:col-span-2 flex flex-col justify-between">
+            <div className="w-full">
+              <label htmlFor="totalAmount" className="font-semibold text-lg text-[#BA2685]">
+                Total Amount
+              </label>
+              <input
+                id="totalAmount"
+                type="text"
+                placeholder="0"
+                value={totalAmount}
+                onChange={(e) => handleTotalAmountChange(e.target.value)}
+                className="w-full mt-2 p-4 text-xl rounded-lg border-2 border-gray-300 focus:border-[#BA2685] focus:outline-none text-right"
+              />
+            </div>
+            <div className="mt-6">
+              <BillButton onClick={() => alert('Bill Created!')}>
+                Create Bill
+              </BillButton>
+            </div>
+          </div>
+        </main>
       </div>
     </MainLayout>
   );
 }
+
 export default InputAmount;

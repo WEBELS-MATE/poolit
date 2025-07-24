@@ -143,7 +143,7 @@ const completedBillSamples = [{
 
 const billView = (samples: typeof onGoingBillSamples) => {
     return samples.map((bill) => (
-        <div key={bill.contract_id} className="bg-[#BA2685] p-4 mb-6 rounded-lg flex justify-between rounded text-white">
+        <div key={bill.contract_id} className="bg-gradient-to-r from-[#F36BAB] via-[#D74998] to-[#BA2685] p-4 mb-6 rounded-lg flex justify-between rounded text-white">
             <div className='flex flex-col items-start'>
                 <p className="font-semibold">{bill.title}</p>
                 <p className="text-sm">{bill.date}</p>

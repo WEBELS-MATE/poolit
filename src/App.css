@@ -8,17 +8,28 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: #DDDDDD;
+  background: #dddddd;
   border-radius: 10px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #BA2685;
+  background: #ba2685;
   border-radius: 10px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #BA2685;
+  background: #ba2685;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #ba2685;
+  border-radius: 9999px;
 }
 
 .logo {
