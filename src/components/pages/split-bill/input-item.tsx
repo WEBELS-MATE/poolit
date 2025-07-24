@@ -1,6 +1,7 @@
 import MainLayout from '../../layout/MainLayout';
 import { useState, useMemo } from 'react';
 import Button from '../../ui/BillButton';
+import ModalSetItem from '../../ui/modalSetItem';
 type ItemAssignmentsType = {
   [itemId: number]: string[];
 };
@@ -151,7 +152,10 @@ export default function InputItem() {
   const totalAmount = useMemo(() => {
     return items.reduce((total, item) => total + item.price, 0);
   }, [items]);
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleAddItem = (newItem: { id: number; name: string; price: number }) => {
+    setItems((prevItems) => [...prevItems, newItem]);
+  };
   return (
     <MainLayout>
       <div className="grid grid-cols-1 mt-10 lg:grid-cols-2 gap-12">
@@ -183,9 +187,17 @@ export default function InputItem() {
           </div>
         </div>
         <div className="right flex flex-col pr-10  text-start gap-7">
-          <div className="flex mt-10 p-5 items-center justify-center border-2 border-[#BA2685]">
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="flex mt-10 p-5 items-center justify-center border-2 border-[#BA2685]"
+          >
             <p className="text-[#BA2685]">+ Add Item</p>
-          </div>
+          </button>
+          <ModalSetItem
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            onAddItem={handleAddItem}
+          />
           <div className="border-[#AAAAAA] rounded-lg border-[0.1px] p-5">
             <p>Participants</p>
             <div className="mt-5 w-full overflow-x-auto custom-scrollbar">
