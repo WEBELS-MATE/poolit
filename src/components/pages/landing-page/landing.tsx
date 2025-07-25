@@ -5,7 +5,9 @@ import Poolit from '../../../assets/poolit-typography.png';
 import Mouse from '../../../assets/mouse.png';
 import GetStartedButton from '../../ui/get-started-button'
 
-export default function Landing() {
+
+
+export default function Landing({ login }: { login: () => void }) {
   return (
     <div id='landing' className="snap-startrelative min-h-screen flex items-center justify-center bg-gradient-to-l from-[#BA2685] to-[#54113C]">
       <img
@@ -20,7 +22,7 @@ export default function Landing() {
           Poolit addresses the lack of open and decentralized crowdfunding by enabling trustless fundraising with Bitcoin (ckBTC) on the Internet Computer, eliminating borders, middlemen, and high fees
         </h3>
 
-        <GetStartedButton>
+        <GetStartedButton login={login}>
           Get Started
         </GetStartedButton>
 
