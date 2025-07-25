@@ -22,7 +22,7 @@ const DashboardIcon = ({
 const SplitBillIcon = ({
   className,
   isActive,
-}: {
+}: {  
   className?: string;
   isActive: boolean;
 }) => (
@@ -63,7 +63,7 @@ export default function Sidebar() {
       <nav className="flex flex-col flex-grow">
         <ul className="flex flex-col gap-4 flex-grow">
           <li>
-            <NavLink to="/" className={getNavLinkClass}>
+            <NavLink to="/dashboard" className={getNavLinkClass}>
               {({ isActive }) => (
                 <>
                   <DashboardIcon className="mr-4" isActive={isActive} /> Dashboard
