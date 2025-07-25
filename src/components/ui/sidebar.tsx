@@ -22,7 +22,7 @@ const DashboardIcon = ({
 const SplitBillIcon = ({
   className,
   isActive,
-}: {  
+}: {
   className?: string;
   isActive: boolean;
 }) => (
@@ -47,7 +47,7 @@ const LogoutIcon = ({ className }: { className?: string }) => (
   </span>
 );
 
-export default function Sidebar() {
+export default function Sidebar({ logout }: { logout: () => void }) {
   const baseLinkClass =
     'flex items-center w-full px-4 py-3 rounded-lg text-md font-semibold';
 
@@ -92,12 +92,11 @@ export default function Sidebar() {
 
           {/* Logout at the bottom */}
           <li className="mt-auto">
-            <Link
-              to="/logout"
-              className={`${baseLinkClass} text-[#BA2685] hover:bg-[#BA2685]-100 hover:text-[#BA2685]`}
+            <button onClick={logout}
+              className={`${baseLinkClass} cursor-pointer text-[#BA2685] hover:bg-[#BA2685]-100 hover:text-[#BA2685]`}
             >
               <LogoutIcon className="mr-4" /> Logout
-            </Link>
+            </button>
           </li>
         </ul>
       </nav>

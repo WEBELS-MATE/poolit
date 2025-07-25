@@ -4,9 +4,9 @@ import Topbar from '../ui/topbar';
 import PatternBg from '../../assets/bg-pattern.png';
 
 export default function MainLayout({
-  children,
+  children, logout
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode; logout: () => void;
 }) {
   return (
     <div
@@ -16,7 +16,7 @@ export default function MainLayout({
       }}
     >
       <div className="flex-1">
-        <Sidebar />
+        <Sidebar logout={logout} />
       </div>
       <div className="flex-5 min-h-screen flex flex-col overflow-hidden bg-transparent">
         <Topbar />
