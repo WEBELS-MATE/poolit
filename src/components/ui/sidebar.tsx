@@ -1,5 +1,5 @@
 import { NavLink, Link } from 'react-router-dom';
-import Logo from '../../assets/logo.png';
+import Logo from '../../assets/Logo-Poolit-rd.png';
 import Dashboard from '../../assets/dashboard.png';
 import DashboardActive from '../../assets/dashboard-active.png';
 import SplitBill from '../../assets/split-bill.png';
