@@ -3,15 +3,11 @@ import Sidebar from '../ui/sidebar';
 import Topbar from '../ui/topbar';
 import PatternBg from '../../assets/bg-pattern.png';
 
-import { useAuth } from '../../context/AuthContext';
-
 export default function MainLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { logout } = useAuth();
-
   return (
     <div
       className="flex flex-row w-full h-screen bg-white bg-repeat"
@@ -20,8 +16,7 @@ export default function MainLayout({
       }}
     >
       <div className="flex-1">
-        {/* Tetep sama, tapi 'logout' di sini asalnya dari useAuth(), bukan dari props lagi */}
-        <Sidebar logout={logout} />
+        <Sidebar/>
       </div>
       <div className="flex-5 min-h-screen flex flex-col overflow-hidden bg-transparent">
         <Topbar />
