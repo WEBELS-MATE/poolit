@@ -5,7 +5,7 @@ import IcpLogo from '../../../assets/icp-logo.png';
 import UserIcon from '../../../assets/user-photo.png';
 
 function Dashboard() {
-    const { username, logout } = useAuth();
+    const { username } = useAuth();
 
     return (
         <MainLayout>

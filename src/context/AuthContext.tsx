@@ -65,6 +65,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       } catch (err) {
         console.error('getMyUsername failed:', err);
       }
+
+      console.log("redirect to /dashboard");
     }
   };
 
@@ -81,6 +83,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setActor(null);
     setPrincipal(null);
     setUsername(null);
+
+    window.location.href = "/";
+    console.log("redirect to /");
+
   };
 
   const saveUsername = async () => {
@@ -88,6 +94,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     try {
       await actor.setUsername(inputName);
       setUsername(inputName);
+
+      window.location.href = "/dashboard";
+      console.log("redirect to /dashboard");
     } catch (err) {
       console.error('setUsername failed:', err);
     }

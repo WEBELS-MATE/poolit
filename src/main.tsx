@@ -8,12 +8,12 @@ import './root.css';
 import { AuthProvider } from './context/AuthContext';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <AuthProvider>
-      <AgentProvider withProcessEnv>
-        <ActorProvider idlFactory={idlFactory} canisterId={canisterId}>
-          <App />
-        </ActorProvider>
-      </AgentProvider></AuthProvider>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <AuthProvider>
+    <AgentProvider withProcessEnv>
+      <ActorProvider idlFactory={idlFactory} canisterId={canisterId}>
+        <App />
+      </ActorProvider>
+    </AgentProvider></AuthProvider>
+  // </React.StrictMode>,
 );

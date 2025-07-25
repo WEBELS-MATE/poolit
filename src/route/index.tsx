@@ -17,8 +17,8 @@ export const routes: Route[] = [
   },
   {
 
-    path: '/login',
-    component: lazy(() => import('../components/pages/login')),
+    path: '/set-username',
+    component: lazy(() => import('../components/pages/set-username')),
     isProtected: false,
   },
   {
