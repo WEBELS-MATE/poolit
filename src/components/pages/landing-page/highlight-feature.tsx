@@ -4,7 +4,7 @@ import Frame from '../../../assets/corner-frame.png';
 
 export default function HighlightFeature() {
   return (
-    <div id='highlight' className="min-h-screen bg-white flex items-start justify-between relative" style={{ fontFamily: 'Namco Regular' }}>
+    <div id='highlight' className="snap-start min-h-screen bg-white flex items-start justify-between relative" style={{ fontFamily: 'Namco Regular' }}>
       {/* Frame */}
       <img src={Frame} alt="corner frame" className="rotate-180 absolute top-10 left-40 w-48 select-none" />
       <img src={Frame} alt="corner frame" className="absolute bottom-10 right-40 w-48 select-none" />

@@ -16,7 +16,7 @@ const ListQuestions = [
 
 export default function FQA() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-between pt-24">
+    <div id='fqa' className="snap-start min-h-screen flex flex-col items-center justify-between pt-24">
       <div className="flex w-3/4 px-16 gap-16 flex-col items-center">
         <h3 style={{ fontFamily: 'Namco Regular' }} className="text-2xl text-[#505050]">frequently asked question</h3>
 

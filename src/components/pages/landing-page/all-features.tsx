@@ -4,7 +4,7 @@ import Feature3 from '../../../assets/feature-1.png';
 
 export default function AllFeatures() {
   return (
-    <div className="min-h-screen flex flex-col gap-16 py-24 items-center">
+    <div id='features' className="snap-start min-h-screen flex flex-col gap-16 py-24 items-center">
       <div style={{ fontFamily: 'Namco Regular' }}>
         <h3 className="text-2xl text-[#505050]">all majority</h3>
         <h3 className="text-2xl text-[#BA2685]">features</h3>

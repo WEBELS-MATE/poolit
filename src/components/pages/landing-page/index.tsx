@@ -3,6 +3,8 @@ import Highlight from './highlight-feature';
 import Features from './all-features';
 import FQA from './fqa';
 
+import ScrollToTopButton from '../../ui/scroll-to-top-button';
+
 export default function LandingPage() {
   return (
     <>
@@ -10,6 +12,8 @@ export default function LandingPage() {
       <Highlight />
       <Features />
       <FQA />
+
+      <ScrollToTopButton />
     </>
   );
 }

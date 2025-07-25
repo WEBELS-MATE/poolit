@@ -1,3 +1,5 @@
+import { animateScroll as scroll } from 'react-scroll';
+
 import Pattern from '../../../assets/pattern-1.png';
 import Poolit from '../../../assets/poolit-typography.png';
 import Mouse from '../../../assets/mouse.png';
@@ -5,7 +7,7 @@ import GetStartedButton from '../../ui/get-started-button'
 
 export default function Landing() {
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-gradient-to-l from-[#BA2685] to-[#54113C]">
+    <div id='landing' className="snap-startrelative min-h-screen flex items-center justify-center bg-gradient-to-l from-[#BA2685] to-[#54113C]">
       <img
         src={Pattern}
         alt="pattern"
@@ -22,8 +24,7 @@ export default function Landing() {
           Get Started
         </GetStartedButton>
 
-        <a href='#highlight'>
-          <img src={Mouse} className='select-none cursor-pointer w-8 mt-4' alt="mouse" /></a>
+        <img src={Mouse} className='select-none cursor-pointer w-8 mt-4' alt="mouse" onClick={() => scroll.scrollToBottom({ duration: 3000, smooth: true })} />
       </div>
     </div>
   )

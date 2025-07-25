@@ -17,11 +17,11 @@ export default function Accordion({
     <div className="bg-[#BA2685] rounded-lg text-white">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex justify-between items-center w-full text-lg px-4 py-3 font-semibold text-left"
+        className="flex cursor-pointer justify-between items-center w-full text-lg px-4 py-3 font-semibold text-left"
       >
         <span>{title}</span>
         <span
-          className={`transition-transform duration-300 ${isOpen ? "rotate-180" : ""
+          className={`transition-transform duration-500 ${isOpen ? "rotate-180" : ""
             }`}
         >
           {/* Chevron SVG */}
@@ -44,7 +44,7 @@ export default function Accordion({
       </button>
 
       <div
-        className={`text-md text-left px-4 pt-0 pb-3 transition-all duration-300 ${isOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0 overflow-hidden"
+        className={`text-md cursor-default text-left px-4 pt-0 pb-3 transition-all duration-300 ${isOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0 overflow-hidden"
           }`}
       >
         {children}
