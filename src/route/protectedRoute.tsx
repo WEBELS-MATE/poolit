@@ -57,7 +57,7 @@ const ProtectedRoute = ({ children }: React.PropsWithChildren<{}>) => {
   }
 
   if (!isProfileComplete) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/" replace />;
   }
 
   return <>{children}</>;

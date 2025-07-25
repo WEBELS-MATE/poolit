@@ -7,6 +7,17 @@ import Logo from '../../../assets/logo-poolit-text.png';
 
 export default function SetUsername() {
   const { principal, username, inputName, setInputName, saveUsername, logout } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (username && username.length > 0) {
+      navigate("/dashboard");
+      console.log("username", username);
+    } else {
+      navigate("/set-username");
+    }
+  }, [username]);
+
   return (
     <div
       className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-[#54113C] to-[#BA2685] bg-no-repeat bg-cover"

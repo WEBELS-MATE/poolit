@@ -65,8 +65,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       } catch (err) {
         console.error('getMyUsername failed:', err);
       }
-
-      console.log("redirect to /dashboard");
     }
   };
 
