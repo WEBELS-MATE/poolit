@@ -1,14 +1,18 @@
+import { useAuth } from '../../../context/AuthContext';
+
 import MainLayout from "../../layout/MainLayout";
 import IcpLogo from '../../../assets/icp-logo.png';
 import UserIcon from '../../../assets/user-photo.png';
 
-function Dashboard({ logout }: { logout: () => void }) {
+function Dashboard() {
+    const { username, logout } = useAuth();
+
     return (
         <MainLayout logout={logout}>
             <div className="p-6 text-[#A3007D] font-semibold">
                 {/* Wallet Username */}
                 {/* <h1 className="text-2xl mb-6 text-start">ZeroZennn’s Wallet</h1> */}
-                        
+
 
 
                 {/* Pending Bill + ICP Balance */}
@@ -26,7 +30,7 @@ function Dashboard({ logout }: { logout: () => void }) {
                                     <img src={UserIcon} alt="ICP Logo" className="w-[120px]" />
                                     <div className="wrap-name flex flex-col items-start">
                                         <h1>Wallet</h1>
-                                        <h1 className="username text-7xl font-bold">ZeroZennn</h1>
+                                        <h1 className="username text-7xl font-bold">{username}</h1>
                                     </div>
                                 </div>
                                 <div className="bill-total">
@@ -36,7 +40,7 @@ function Dashboard({ logout }: { logout: () => void }) {
 
                         </div>
                         {/* set new usn button */}
-                        <div className="bg-gradient-to-r from-[#BA2685] to-[#F36BAB] w-[338px] h-[100px] button-set-usn absolute -bottom-8 right-0 p-6 flex justify-center items-center cursor-pointer" style={{ 
+                        <div className="bg-gradient-to-r from-[#BA2685] to-[#F36BAB] w-[338px] h-[100px] button-set-usn absolute -bottom-8 right-0 p-6 flex justify-center items-center cursor-pointer" style={{
                             clipPath: 'polygon( 15.552% 92.593%,0% 92.593%,15.552% 0%,15.552% 92.593%,97.416% 92.593%,97.416% 0%,15.562% 0%,15.562% 92.593%,97.416% 92.593% )'
                         }}>
                             <h1 className="username text-xl font-semibold text-amber-50 uppercase">Set New Username</h1>

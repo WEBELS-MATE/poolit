@@ -1,4 +1,5 @@
 import { animateScroll as scroll } from 'react-scroll';
+import { useAuth } from '../../../context/AuthContext';
 
 import Pattern from '../../../assets/pattern-1.png';
 import Poolit from '../../../assets/poolit-typography.png';
@@ -7,7 +8,9 @@ import GetStartedButton from '../../ui/get-started-button'
 
 
 
-export default function Landing({ login }: { login: () => void }) {
+export default function Landing() {
+  const { login } = useAuth();
+
   return (
     <div id='landing' className="snap-startrelative min-h-screen flex items-center justify-center bg-gradient-to-l from-[#BA2685] to-[#54113C]">
       <img
