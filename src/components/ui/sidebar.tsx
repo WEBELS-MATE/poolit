@@ -47,7 +47,7 @@ const LogoutIcon = ({ className }: { className?: string }) => (
   </span>
 );
 
-export default function Sidebar({ logout }: { logout: () => void }) {
+export default function Sidebar({ logout }: { logout?: () => void }) {
   const baseLinkClass =
     'flex items-center w-full px-4 py-3 rounded-lg text-md font-semibold';
 
@@ -63,7 +63,7 @@ export default function Sidebar({ logout }: { logout: () => void }) {
       <nav className="flex flex-col flex-grow">
         <ul className="flex flex-col gap-4 flex-grow">
           <li>
-            <NavLink to="/dashboard" className={getNavLinkClass}>
+            <NavLink to="/" className={getNavLinkClass}>
               {({ isActive }) => (
                 <>
                   <DashboardIcon className="mr-4" isActive={isActive} /> Dashboard

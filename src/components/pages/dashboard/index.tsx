@@ -8,7 +8,7 @@ function Dashboard() {
     const { username, logout } = useAuth();
 
     return (
-        <MainLayout logout={logout}>
+        <MainLayout>
             <div className="p-6 text-[#A3007D] font-semibold">
                 {/* Wallet Username */}
                 {/* <h1 className="text-2xl mb-6 text-start">ZeroZennn’s Wallet</h1> */}
