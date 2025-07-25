@@ -8,10 +8,12 @@ function Dashboard() {
             <div className="p-6 text-[#A3007D] font-semibold">
                 {/* Wallet Username */}
                 {/* <h1 className="text-2xl mb-6 text-start">ZeroZennn’s Wallet</h1> */}
+                        
+
 
                 {/* Pending Bill + ICP Balance */}
                 <div className="grid grid-cols-12 gap-10">
-                    <div className="col-span-8">
+                    <div className="col-span-8 relative">
                         <div className="relative bg-[#BA2685] h-[387px] text-white p-6"
                             style={{
                                 clipPath: 'polygon(100% 77.003%,69.244% 77.003%,64% 100%,0% 100%,0% 25.84%,0% 25.84%,0.138% 21.648%,0.537% 17.672%,1.175% 13.965%,2.031% 10.579%,3.083% 7.568%,4.31% 4.986%,5.689% 2.884%,7.199% 1.317%,8.819% 0.338%,10.526% 0%,100% 0%,100% 77.003%)'
@@ -31,6 +33,13 @@ function Dashboard() {
 
                                     </div>
                             </div>
+
+                        </div>
+                        {/* set new usn button */}
+                        <div className="bg-gradient-to-r from-[#BA2685] to-[#F36BAB] w-[338px] h-[100px] button-set-usn absolute -bottom-8 right-0 p-6 flex justify-center items-center cursor-pointer" style={{ 
+                            clipPath: 'polygon( 15.552% 92.593%,0% 92.593%,15.552% 0%,15.552% 92.593%,97.416% 92.593%,97.416% 0%,15.562% 0%,15.562% 92.593%,97.416% 92.593% )'
+                        }}>
+                            <h1 className="username text-xl font-semibold text-amber-50 uppercase">Set New Username</h1>
                         </div>
                     </div>
                     <div className="col-span-4">
@@ -71,7 +80,7 @@ function Dashboard() {
                             <button className="text-sm flex items-center gap-1">
                                 Bill Detail
                                 <span>
-                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  className="icon icon-tabler icons-tabler-outline icon-tabler-login-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 8v-2a2 2 0 0 1 2 -2h7a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-2" /><path d="M3 12h13l-3 -3" /><path d="M13 15l3 -3" /></svg>
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  className="icon icon-tabler icons-tabler-outline icon-tabler-external-link"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" /><path d="M11 13l9 -9" /><path d="M15 4h5v5" /></svg>
                                 </span>
                             </button>
                         </div>
