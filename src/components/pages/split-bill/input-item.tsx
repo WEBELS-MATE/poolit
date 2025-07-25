@@ -1,7 +1,8 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import MainLayout from '../../layout/MainLayout';
 import Button from '../../ui/BillButton';
 import ModalSetItem from '../../ui/modalSetItem';
+import { createActor, canisterId } from '../../../declarations/backend';
 import AddParticipantsModal from '../../ui/add-participants-modal';
 
 type ItemType = {
@@ -29,6 +30,15 @@ const initialUser: { principal: number; username: string }[] = [
   { principal: 6, username: 'Citra' },
 ];
 
+const formatIcp = (amount: number) => {
+  return (
+    new Intl.NumberFormat('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 8,
+    }).format(amount) + ' ICP'
+  );
+};
+
 const formatCurrency = (amount: number) => {
   return new Intl.NumberFormat('id-ID', {
     style: 'currency',
@@ -49,6 +59,36 @@ export default function InputItem() {
   const [isItemModalOpen, setIsItemModalOpen] = useState(false);
   const [isParticipantModalOpen, setIsParticipantModalOpen] = useState(false);
 
+  const [icpRate, setIcpRate] = useState<number | null>(null);
+  const [isRateLoading, setIsRateLoading] = useState(true);
+  const [rateError, setRateError] = useState<string | null>(null);
+  useEffect(() => {
+    const fetchIcpRate = async () => {
+      try {
+        const backend = createActor(canisterId);
+        const data = await backend.get_price_conversion(BigInt(1), 'IDR');
+        console.log('INTIP ISI DATA DARI BACKEND:', data);
+        const parsedData = JSON.parse(data);
+        const rate = parsedData.data[0].quote.ICP.price;
+        setIcpRate(rate);
+      } catch (error: any) {
+        setRateError(
+          error.message || 'Terjadi kesalahan saat mengambil rate ICP.',
+        );
+        console.error(error);
+      } finally {
+        setIsRateLoading(false);
+      }
+    };
+
+    fetchIcpRate();
+  }, []);
+
+  const convertToIcp = (amountInIdr: number): number => {
+    if (icpRate === null) return 0;
+    return amountInIdr * icpRate;
+  };
+
   const handleToggleParticipant = (participant: {
     principal: number;
     username: string;
@@ -57,7 +97,6 @@ export default function InputItem() {
       const isAlreadyAdded = currentParticipants.some(
         (p) => p.principal === participant.principal,
       );
-
       if (isAlreadyAdded) {
         return currentParticipants.filter(
           (p) => p.principal !== participant.principal,
@@ -99,19 +138,16 @@ export default function InputItem() {
         ? [...newAssignments[itemId]]
         : [];
       const userIndex = assignees.indexOf(selectedParticipantId);
-
       if (userIndex > -1) {
         assignees.splice(userIndex, 1);
       } else {
         assignees.push(selectedParticipantId);
       }
-
       if (assignees.length === 0) {
         delete newAssignments[itemId];
       } else {
         newAssignments[itemId] = assignees;
       }
-
       return newAssignments;
     });
   };
@@ -121,7 +157,6 @@ export default function InputItem() {
     participants.forEach((p) => {
       amounts[p.principal] = 0;
     });
-
     for (const itemId in itemAssignments) {
       const assignees = itemAssignments[itemId];
       const item = items.find((i) => i.id === parseInt(itemId));
@@ -134,18 +169,24 @@ export default function InputItem() {
         });
       }
     }
+    return participants.map((p) => {
+      const amountInIdr = amounts[p.principal] || 0;
+      return {
+        ...p,
+        amount: amountInIdr,
+        amountInIcp: convertToIcp(amountInIdr),
+      };
+    });
+  }, [participants, items, itemAssignments, icpRate]);
 
-    return participants.map((p) => ({
-      ...p,
-      amount: amounts[p.principal] || 0,
-    }));
-  }, [participants, items, itemAssignments]);
-
-  const totalAmount = useMemo(
+  const totalAmountInIdr = useMemo(
     () => items.reduce((total, item) => total + item.price, 0),
     [items],
   );
-
+  const totalAmountInIcp = useMemo(
+    () => convertToIcp(totalAmountInIdr),
+    [totalAmountInIdr, icpRate],
+  );
   const selectedPrincipals = useMemo(
     () => new Set(participants.map((p) => p.principal)),
     [participants],
@@ -154,21 +195,36 @@ export default function InputItem() {
   return (
     <MainLayout>
       <div className="grid grid-cols-1 mt-10 lg:grid-cols-2 gap-12">
-        <div className="left flex flex-col text-start gap-17">
+        <div className="left flex flex-col text-start gap-12">
           <div>
             <h2 className="text-[#BA2685]">Total Amount</h2>
-            <p className="mt-3 font-medium text-2xl">
-              {formatCurrency(totalAmount)}
-            </p>
+            {isRateLoading ? (
+              <p className="mt-3 font-medium text-2xl">
+                Menghitung rate ICP...
+              </p>
+            ) : rateError ? (
+              <p className="mt-3 font-medium text-lg text-red-500">
+                {rateError}
+              </p>
+            ) : (
+              <>
+                <p className="mt-3 font-medium text-2xl">
+                  {formatIcp(totalAmountInIcp)}
+                </p>
+                <p className="text-sm text-gray-500">
+                  ~ {formatCurrency(totalAmountInIdr)}
+                </p>
+              </>
+            )}
           </div>
-          <div className="w-full grid grid-cols-1 p-5 border-[#AAAAAA] rounded-lg border-[0.1px]">
+          <div className="w-full grid grid-cols-1 p-5 border border-gray-200 rounded-lg">
             <button
               onClick={() => setIsParticipantModalOpen(true)}
               className="text-center flex-1 bg-[#BA2685] text-white h-15 w-full flex items-center justify-center rounded-lg cursor-pointer"
             >
               Add Participant
             </button>
-            <ul className="mt-10 text-black ml-3 flex flex-col gap-10 h-105 overflow-y-auto pr-2">
+            <ul className="mt-10 text-black ml-3 flex flex-col gap-8 h-105 overflow-y-auto pr-2">
               {participantsWithAmounts.map((item) => (
                 <li
                   key={item.principal}
@@ -176,9 +232,12 @@ export default function InputItem() {
                 >
                   {item.profile}
                   <p className="text-start col-span-3">{item.username}</p>
-                  <p className="text-start font-medium">
-                    {formatCurrency(item.amount)}
-                  </p>
+                  <div className="text-start font-medium text-sm">
+                    <p>{formatIcp(item.amountInIcp)}</p>
+                    <p className="text-xs text-gray-500">
+                      ~{formatCurrency(item.amount)}
+                    </p>
+                  </div>
                 </li>
               ))}
             </ul>
@@ -192,14 +251,14 @@ export default function InputItem() {
           >
             <p className="text-[#BA2685]">+ Add Item</p>
           </button>
-          <div className="border-[#AAAAAA] rounded-lg border-[0.1px] p-5">
+          <div className="border border-gray-200 rounded-lg p-5">
             <p>Select participant to assign item:</p>
             <div className="mt-5 w-full overflow-x-auto">
               <div className="flex flex-row gap-10 p-4 mb-3 w-max">
                 {participants.map((item) => (
                   <div
                     key={item.principal}
-                    className={`cursor-pointer rounded-full transition-all ${selectedParticipantId === item.principal ? 'ring-3 ring-offset-1 ring-[#BA2685]' : ''}`}
+                    className={`cursor-pointer rounded-full transition-all ${selectedParticipantId === item.principal ? 'ring-3 ring-offset-2 ring-[#BA2685]' : ''}`}
                     onClick={() => handleSelectParticipant(item.principal)}
                   >
                     {item.profile}
@@ -208,7 +267,7 @@ export default function InputItem() {
               </div>
             </div>
           </div>
-          <div className="border-[#AAAAAA] rounded-lg border-[0.1px] p-5">
+          <div className="border border-gray-200 rounded-lg p-5">
             {items.length === 0 ? (
               <p className="text-center text-black">No items added yet.</p>
             ) : (
@@ -235,7 +294,7 @@ export default function InputItem() {
                         ) ||
                           false)
                       }
-                      disabled={selectedParticipantId === null}
+                      disabled={selectedParticipantId === null || isRateLoading}
                     />
                   </li>
                 ))}

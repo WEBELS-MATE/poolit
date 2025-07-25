@@ -8,6 +8,8 @@ import SplitBill "SplitBill";
 import User "User";
 import AddressBook "AddressBook";
 import Ledger "Ledger";
+import IC "ic:aaaaa-aa";
+import Blob "mo:base/Blob";
 
 actor class Backend() {
 
@@ -93,5 +95,51 @@ actor class Backend() {
         "Unable to found contract by provided identifier";
       };
     };
+  };
+
+  public query func transform({
+    context : Blob;
+    response : IC.http_request_result;
+  }) : async IC.http_request_result {
+    {
+      response with headers = [];
+    };
+  };
+
+  public func get_price_conversion(
+    amount : Nat,
+    symbols : Text,
+  ) : async Text {
+
+    let url = "https://pro-api.coinmarketcap.com/v2/tools/price-conversion?amount=" # Nat.toText(amount) # "&symbol=" # symbols # "&convert=ICP";
+
+    let request_headers = [
+      { name = "User-Agent"; value = "price-feed" },
+      {
+        name = "X-CMC_PRO_API_KEY";
+        value = "91d37a7c-aa31-4bc6-8c5a-1c698200daa6";
+      },
+    ];
+
+    let http_request : IC.http_request_args = {
+      url = url;
+      max_response_bytes = null;
+      headers = request_headers;
+      body = null;
+      method = #get;
+      transform = ?{
+        function = transform;
+        context = Blob.fromArray([]);
+      };
+      is_replicated = ?false;
+    };
+
+    let http_response : IC.http_request_result = await (with cycles = 230_949_972_000) IC.http_request(http_request);
+
+    let decoded_text : Text = switch (Text.decodeUtf8(http_response.body)) {
+      case (null) { "No value returned" };
+      case (?y) { y };
+    };
+    decoded_text;
   };
 };

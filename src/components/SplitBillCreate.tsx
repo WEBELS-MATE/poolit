@@ -95,8 +95,8 @@ const AddParticipantModal = ({
                                     onClick={() => !isAdded && onAddParticipant(user)}
                                     disabled={isAdded}
                                     className={`px-4 py-2 text-sm font-semibold rounded-lg transition ${isAdded
-                                            ? 'bg-gray-400 text-white cursor-not-allowed'
-                                            : 'bg-pink-600 text-white hover:bg-pink-700'
+                                        ? 'bg-gray-400 text-white cursor-not-allowed'
+                                        : 'bg-pink-600 text-white hover:bg-pink-700'
                                         }`}
                                 >
                                     {isAdded ? 'Added' : 'Add'}
@@ -206,8 +206,8 @@ export default function SplitBillCreate() {
                         <button
                             onClick={() => setSplitMode('equally')}
                             className={`w-1/2 py-3 rounded-full text-center font-semibold transition-all duration-300 ${splitMode === 'equally'
-                                    ? 'bg-gradient-to-r from-pink-500 to-fuchsia-600 text-white shadow-lg'
-                                    : 'text-gray-600 hover:bg-gray-100'
+                                ? 'bg-gradient-to-r from-[#BA2685] to-[#F36BAB] text-white shadow-lg'
+                                : 'text-gray-600 hover:bg-gray-100'
                                 }`}
                         >
                             Divide equally
@@ -215,8 +215,8 @@ export default function SplitBillCreate() {
                         <button
                             onClick={() => setSplitMode('custom')}
                             className={`w-1/2 py-3 rounded-full text-center font-semibold transition-all duration-300 ${splitMode === 'custom'
-                                    ? 'bg-gradient-to-r from-pink-500 to-fuchsia-600 text-white shadow-lg'
-                                    : 'text-gray-600 hover:bg-gray-100'
+                                ? 'bg-gradient-to-r from-[#BA2685] to-[#F36BAB] text-white shadow-lg'
+                                : 'text-gray-600 hover:bg-gray-100'
                                 }`}
                         >
                             Custom
@@ -228,7 +228,7 @@ export default function SplitBillCreate() {
                         <div className="bg-white p-6 rounded-2xl shadow-lg">
                             <button
                                 onClick={() => setIsModalOpen(true)}
-                                className="w-full bg-gradient-to-r from-pink-600 to-fuchsia-700 text-white font-bold py-4 rounded-xl mb-6 hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+                                className="w-full bg-gradient-to-r from-[#BA2685] to-[#F36BAB] text-white font-bold py-4 rounded-xl mb-6 hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
                             >
                                 <IconPlus size={20} />
                                 Add Participant
@@ -299,7 +299,7 @@ export default function SplitBillCreate() {
                             </div>
                             <button
                                 onClick={handleCreateBill}
-                                className="w-full bg-gradient-to-r from-pink-600 to-fuchsia-700 text-white font-bold py-5 rounded-xl mt-8 text-xl hover:opacity-90 transition-opacity shadow-lg"
+                                className="w-full bg-gradient-to-r from-[#BA2685] to-[#F36BAB] text-white font-bold py-5 rounded-xl mt-8 text-xl hover:opacity-90 transition-opacity shadow-lg"
                             >
                                 Create Bill
                             </button>
