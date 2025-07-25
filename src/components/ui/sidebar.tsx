@@ -7,6 +7,7 @@ import SplitBillActive from '../../assets/split-bill-active.png';
 import Profile from '../../assets/profile.png';
 import ProfileActive from '../../assets/profile-active.png';
 import Logout from '../../assets/logout.png';
+import { useAuth } from '../../context/AuthContext';
 
 const DashboardIcon = ({
   className,
@@ -47,7 +48,9 @@ const LogoutIcon = ({ className }: { className?: string }) => (
   </span>
 );
 
-export default function Sidebar({ logout }: { logout?: () => void }) {
+export default function Sidebar() {
+  const { logout } = useAuth();
+
   const baseLinkClass =
     'flex items-center w-full px-4 py-3 rounded-lg text-md font-semibold';
 
@@ -58,7 +61,11 @@ export default function Sidebar({ logout }: { logout?: () => void }) {
   return (
     <div className="fixed top-0 left-0 h-screen w-64 bg-white border-r border-gray-300 flex flex-col p-5">
       <div className="flex flex-col items-center mb-10">
-        <img src={Logo} alt="Poolit Logo" className="select-none w-32 h-32 object-contain" />
+        <img
+          src={Logo}
+          alt="Poolit Logo"
+          className="select-none w-32 h-32 object-contain"
+        />
       </div>
       <nav className="flex flex-col flex-grow">
         <ul className="flex flex-col gap-4 flex-grow">
@@ -66,7 +73,8 @@ export default function Sidebar({ logout }: { logout?: () => void }) {
             <NavLink to="/" className={getNavLinkClass}>
               {({ isActive }) => (
                 <>
-                  <DashboardIcon className="mr-4" isActive={isActive} /> Dashboard
+                  <DashboardIcon className="mr-4" isActive={isActive} />{' '}
+                  Dashboard
                 </>
               )}
             </NavLink>
@@ -75,7 +83,8 @@ export default function Sidebar({ logout }: { logout?: () => void }) {
             <NavLink to="/split-bill" className={getNavLinkClass}>
               {({ isActive }) => (
                 <>
-                  <SplitBillIcon className="mr-4" isActive={isActive} /> Split Bill
+                  <SplitBillIcon className="mr-4" isActive={isActive} /> Split
+                  Bill
                 </>
               )}
             </NavLink>
@@ -92,7 +101,8 @@ export default function Sidebar({ logout }: { logout?: () => void }) {
 
           {/* Logout at the bottom */}
           <li className="mt-auto">
-            <button onClick={logout}
+            <button
+              onClick={logout}
               className={`${baseLinkClass} cursor-pointer text-[#BA2685] hover:bg-[#BA2685]-100 hover:text-[#BA2685]`}
             >
               <LogoutIcon className="mr-4" /> Logout
