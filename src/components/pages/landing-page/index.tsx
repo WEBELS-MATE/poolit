@@ -15,7 +15,7 @@ export default function LandingPage() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      if (username) {
+      if (username && username.length > 0) {
         navigate("/dashboard");
       } else {
         navigate("/set-username");
