@@ -7,17 +7,25 @@ import Logo from '../../../assets/logo-poolit-text.png';
 
 export default function SetUsername() {
   const { principal, username, inputName, setInputName, saveUsername, logout } = useAuth();
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (username && username.length > 0) {
-      navigate("/dashboard");
-      console.log("username", username);
-    } else {
-      navigate("/set-username");
+    if (username) {
+      setIsCheckingAuth(false);
     }
   }, [username]);
-
+  useEffect(() => {
+    if (!isCheckingAuth) {
+      if (username && username.length > 0) {
+        navigate('/dashboard');
+        console.log('username', username);
+      }
+    }
+  }, [username, isCheckingAuth, navigate]);
+  if (isCheckingAuth) {
+    return <>Loading...</>;
+  }
   return (
     <div
       className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-[#54113C] to-[#BA2685] bg-no-repeat bg-cover"
